@@ -11,4 +11,4 @@ How to Use? (Setup time: ETA 5mins)
 4. In the file "credentials.txt" add your gmail (This is the email which will be sending the mail notification, it HAS to be GMAIL)username, and password - don't worry, you will be running it locally, so no one is going to see them :D
 5. Gmail, by default blocks logins via scripts, you can change that by following simple steps mentioned here: https://tinyurl.com/58pzhyuh
 
-6. Just run scriot using command `python3 helper.py` 
+6. Just run script using command `python3 helper.py` 
