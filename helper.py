@@ -3,11 +3,13 @@ import time
 import hashlib 
 import urllib.request 
 import ssl
+import difflib
 import notify as ng
+import readurl as rd
 from urllib.request import urlopen, Request 
 from urllib.request import build_opener, HTTPCookieProcessor
 opener = build_opener(HTTPCookieProcessor())
-
+global_threshold = 0
 ssl._create_default_https_context = ssl._create_unverified_context
 
 def init_url_list():
@@ -16,56 +18,34 @@ def init_url_list():
             url_list = [line.rstrip() for line in f]
 
     return url_list
+    
 
-def get_url_responses(url_list):
-    responses =[]
-    for url in url_list:
-        responses.append(urlopen(url).read())
-    return responses
+def get_webpage(url):
+    return rd.read_url(url)
 
-def get_html_hashes(responses):
-    currentHashes = []
-    for response in responses:
-        currentHashes.append(hashlib.sha224(response).hexdigest())
-    return currentHashes
-
-def initialize_currentHashes(url_list):
-
-    responses = get_url_responses(url_list)
-    currentHashes = get_html_hashes(responses) 
-     
-    return (currentHashes)
-
-def diff(currentHashes,newHashes,url_list):
-    sz = len(currentHashes)
-    changed = 0
-    for i in range(sz):
-        if newHashes[i]==currentHashes[i]:
-            continue
-        else:
-            changed = 1
-            print("something changed: "+ str(url_list[i])) 
-            ng.shoot_alert(url_list[i])
-
-    return changed
+def string_diff(string1, string2):
+    return [li for li in difflib.ndiff(string1, string2) if li[0] != ' ']
 
 def play(url_list):
-    while True: 
-        try: 
-            currentHashes = initialize_currentHashes(url_list)
-            time.sleep(30) 
-              
-            newHashes = initialize_currentHashes(url_list)
-            
-            changed = diff(currentHashes,newHashes,url_list)
-            if changed: 
-                time.sleep(30) 
-                continue
-                  
-        except Exception as e: 
-            print("error: "+str(e))
-
+    godDict = {}
     
+    for url in url_list:
+        godDict[url]  = get_webpage(url)
+
+    while True:
+        time.sleep(30)
+        for url in url_list:
+            new = get_webpage(url)
+            actual = godDict.get(url)
+            diff = string_diff(new,actual)
+            diff_amount = len(diff)
+            if diff_amount>global_threshold:
+                ng.shoot_alert(url)
+                godDict[url] = new
+                print(url+' : UPADTED ')
+                print('Diff= : ', diff)
+
+
 
 
 

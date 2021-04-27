@@ -26,7 +26,7 @@ def shoot_alert(url):
 		ts = time.time()
 		TIME_STAMP = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S') 
 		msg = MIMEMultipart()
-		msg['From'] = credentials[0]
+		msg['From'] = EMAIL_USER
 		msg['To'] = dest
 		msg['Subject'] = 'ALERT!! CHANGE DETECTED '+ str(TIME_STAMP)
 		body = '\nA CHANGE WAS DETECTED IN THE FOLLOWING WEBPAGE: '+ str(url)
