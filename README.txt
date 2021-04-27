@@ -12,3 +12,5 @@ How to Use? (Setup time: ETA 5mins)
 5. Gmail, by default blocks logins via scripts, you can change that by following simple steps mentioned here: https://tinyurl.com/58pzhyuh
 
 6. Just run script using command `python3 helper.py` 
+
+TIP: Keep the script running in the background in the time window, whenever you feel anything important may be released
