@@ -1,14 +1,11 @@
 # Importing libraries 
 import time 
 import hashlib 
-import urllib.request 
 import ssl
 import difflib
 import notify as ng
 import readurl as rd
-from urllib.request import urlopen, Request 
-from urllib.request import build_opener, HTTPCookieProcessor
-opener = build_opener(HTTPCookieProcessor())
+
 global_threshold = 0
 ssl._create_default_https_context = ssl._create_unverified_context
 
