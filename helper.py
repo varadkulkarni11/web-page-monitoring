@@ -6,7 +6,7 @@ import difflib
 import notify as ng
 import readurl as rd
 
-global_threshold = 0
+global_threshold = 10
 ssl._create_default_https_context = ssl._create_unverified_context
 
 def init_url_list():
