@@ -1,8 +1,11 @@
-from urllib.request import urlopen
+import ssl
+from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
-
+ssl._create_default_https_context = ssl._create_unverified_context
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
 def read_url(url):
-	html = urlopen(url).read()
+	req = Request(url, headers=headers)
+	html = urlopen(req,timeout=20).read()
 	soup = BeautifulSoup(html, features="html.parser")
 	# kill all script and style elements
 	for script in soup(["script", "style"]):

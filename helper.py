@@ -18,16 +18,26 @@ def init_url_list():
     
 
 def get_webpage(url):
-    return rd.read_url(url)
+    try:
+        return rd.read_url(url)
+    except Exception as e: print(e ,url,' IN GETTING WEBPAGE')
 
 def string_diff(string1, string2):
-    return [li for li in difflib.ndiff(string1, string2) if li[0] != ' ']
+    try:
+        if (len(string1)==0 or len(string2)==0):
+            return []
+        return [li for li in difflib.ndiff(string1, string2) if li[0] != ' ']
+
+    except Exception as e: 
+        print(e ,string1, string2 ,' IN GETTING STRING DIFF')
+        return []
 
 def play(url_list):
     godDict = {}
     
     for url in url_list:
         godDict[url]  = get_webpage(url)
+
 
     while True:
         time.sleep(30)
