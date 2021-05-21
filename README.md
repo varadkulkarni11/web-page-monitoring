@@ -14,3 +14,8 @@ How to Use? (Setup time: ETA 5mins)
 6. Just run script using command `python3 helper.py` 
 
 TIP: Keep the script running in the background in the time window, whenever you feel anything important may be released
+
+Any doubts, feel free to reach out-
+
+LinkedIn: https://www.linkedin.com/in/varadkulkarni11
+Email: varadvinodkulkarni@gmail.com
